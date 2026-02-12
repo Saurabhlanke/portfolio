@@ -10,7 +10,7 @@ export default function Navigation() {
 
   return (
     <nav>
-      <div className="logo">Portfolio</div>
+      <div className="logo">Nidhi</div>
       <ul>
         <li><button onClick={() => scrollToSection('hero')} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#fff', fontSize: '1rem' }}>Home</button></li>
         <li><button onClick={() => scrollToSection('about')} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#fff', fontSize: '1rem' }}>About</button></li>

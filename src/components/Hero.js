@@ -11,8 +11,8 @@ export default function Hero() {
   return (
     <section className="hero" id="hero">
       <div className="hero-content">
-        <h1>Welcome to My Portfolio</h1>
-        <p>Full Stack Developer | React Enthusiast | Problem Solver</p>
+        <h1>Nidhi Malkusare</h1>
+        <p>Full Stack Developer | Creative Problem Solver | Tech Enthusiast</p>
         <button className="cta-button" onClick={scrollToContact}>Get In Touch</button>
       </div>
     </section>
