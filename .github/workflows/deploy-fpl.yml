@@ -1,0 +1,33 @@
+name: Deploy FPL league site to Cloudflare Pages
+
+on:
+  push:
+    branches: [main]
+    paths: ['fpl/**', '.github/workflows/deploy-fpl.yml']
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-fpl
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: fpl
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      PROJECT: ilove3000-fpl
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      # Creates the Pages project the first time; does nothing if it already exists.
+      - name: Create Pages project if needed
+        run: npx --yes wrangler@3 pages project create "$PROJECT" --production-branch main || true
+      # Deploys public/ as the site and functions/ as the /api pass-through to FPL.
+      - name: Deploy
+        run: npx --yes wrangler@3 pages deploy public --project-name "$PROJECT" --branch main --commit-dirty=true
